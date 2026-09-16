@@ -10,6 +10,7 @@
 
   <modules>
     <module>user-crud-service</module>
+    <module>bencode-library</module>
   </modules>
 
   <name>universe</name>
