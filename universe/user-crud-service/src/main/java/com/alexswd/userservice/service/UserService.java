@@ -34,6 +34,16 @@ public class UserService {
     return userRepository.findById(id);
   }
 
+  /** Finds a user when the login name and plaintext password are valid. */
+  @Transactional(readOnly = true)
+  public Optional<User> findByNamePassword(String loginName, String password) {
+    if (loginName == null || loginName.isBlank() || password == null || password.isBlank()) {
+      return Optional.empty();
+    }
+    return userRepository.findByLoginName(loginName)
+        .filter(user -> passwordHasher.matches(password, user.getPasswordHash()));
+  }
+
   @Transactional
   public User create(String loginName, String password) {
     validate(loginName, password);

@@ -1,6 +1,7 @@
 package com.alexswd.userservice.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -41,6 +42,47 @@ class UserServiceTest {
     assertTrue(repository.savedUsers.isEmpty());
   }
 
+  @Test
+  void findByNamePasswordReturnsUserForCorrectCredentials() {
+    InMemoryUserRepository repository = new InMemoryUserRepository();
+    UserService userService = new UserService(repository, passwordHasher);
+    User created = userService.create("alex", "secret");
+
+    assertSame(created, userService.findByNamePassword("alex", "secret").orElseThrow());
+  }
+
+  @Test
+  void findByNamePasswordReturnsEmptyForWrongOrUnknownCredentials() {
+    InMemoryUserRepository repository = new InMemoryUserRepository();
+    UserService userService = new UserService(repository, passwordHasher);
+    userService.create("alex", "secret");
+
+    assertTrue(userService.findByNamePassword("alex", "wrong").isEmpty());
+    assertTrue(userService.findByNamePassword("unknown", "secret").isEmpty());
+  }
+
+  @Test
+  void findByNamePasswordReturnsEmptyForNullOrBlankCredentials() {
+    InMemoryUserRepository repository = new InMemoryUserRepository();
+    UserService userService = new UserService(repository, passwordHasher);
+    userService.create("alex", "secret");
+
+    assertTrue(userService.findByNamePassword(null, "secret").isEmpty());
+    assertTrue(userService.findByNamePassword("alex", null).isEmpty());
+    assertTrue(userService.findByNamePassword("", "secret").isEmpty());
+    assertTrue(userService.findByNamePassword("alex", "").isEmpty());
+  }
+
+  @Test
+  void findByNamePasswordReturnsEmptyForMalformedStoredHash() {
+    InMemoryUserRepository repository = new InMemoryUserRepository();
+    UserService userService = new UserService(repository, passwordHasher);
+    User user = userService.create("alex", "secret");
+    user.setPasswordHash("not-a-password-hash");
+
+    assertTrue(userService.findByNamePassword("alex", "secret").isEmpty());
+  }
+
   private static final class InMemoryUserRepository extends UserRepository {
 
     private final List<User> savedUsers = new ArrayList<>();
@@ -66,6 +108,13 @@ class UserServiceTest {
         return savedUsers.stream().findFirst();
       }
       return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByLoginName(String loginName) {
+      return savedUsers.stream()
+          .filter(user -> loginName != null && loginName.equals(user.getLoginName()))
+          .findFirst();
     }
   }
 }

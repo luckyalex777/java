@@ -29,6 +29,14 @@ public class UserRepository {
     return Optional.ofNullable(sessionFactory.getCurrentSession().get(User.class, id));
   }
 
+  /** Finds a user by the entity login name property. */
+  public Optional<User> findByLoginName(String loginName) {
+    return sessionFactory.getCurrentSession()
+        .createQuery("from User where loginName = :loginName", User.class)
+        .setParameter("loginName", loginName)
+        .uniqueResultOptional();
+  }
+
   public User save(User user) {
     sessionFactory.getCurrentSession().persist(user);
     return user;
