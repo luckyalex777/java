@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alexswd.userservice.entity.User;
 import com.alexswd.userservice.repository.UserRepository;
+import com.alexswd.userservice.security.PasswordHasher;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -16,9 +17,11 @@ public class UserService {
 
   @SuppressFBWarnings("EI_EXPOSE_REP2")
   private final UserRepository userRepository;
+  private final PasswordHasher passwordHasher;
 
-  public UserService(UserRepository userRepository) {
+  public UserService(UserRepository userRepository, PasswordHasher passwordHasher) {
     this.userRepository = userRepository;
+    this.passwordHasher = passwordHasher;
   }
 
   @Transactional(readOnly = true)
@@ -36,7 +39,7 @@ public class UserService {
     validate(loginName, password);
     User user = new User();
     user.setLoginName(loginName);
-    user.setPassword(password);
+    user.setPasswordHash(passwordHasher.hash(password));
     return userRepository.save(user);
   }
 
@@ -45,7 +48,7 @@ public class UserService {
     validate(loginName, password);
     return userRepository.findById(id).map(user -> {
       user.setLoginName(loginName);
-      user.setPassword(password);
+      user.setPasswordHash(passwordHasher.hash(password));
       return userRepository.update(user);
     });
   }

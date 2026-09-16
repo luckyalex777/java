@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "users")
 public class User extends AuditedEntity {
@@ -11,8 +13,8 @@ public class User extends AuditedEntity {
   @Column(name = "login_name", nullable = false, unique = true, length = 100)
   private String loginName;
 
-  @Column(nullable = false, length = 255)
-  private String password;
+  @Column(name = "password_hash", nullable = false, length = 255)
+  private String passwordHash;
 
   public String getLoginName() {
     return loginName;
@@ -22,11 +24,12 @@ public class User extends AuditedEntity {
     this.loginName = loginName;
   }
 
-  public String getPassword() {
-    return password;
+  @JsonIgnore
+  public String getPasswordHash() {
+    return passwordHash;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
+  public void setPasswordHash(String passwordHash) {
+    this.passwordHash = passwordHash;
   }
 }
