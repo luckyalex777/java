@@ -17,16 +17,16 @@ public abstract class AuditedEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, updatable = false, length = 100)
+  @Column(name = "created_by", nullable = false, updatable = false, length = 100)
   private String createdBy;
 
-  @Column(nullable = false, updatable = false)
+  @Column(name = "created_when", nullable = false, updatable = false)
   private Instant createdWhen;
 
-  @Column(nullable = false, length = 100)
+  @Column(name = "updated_by", nullable = false, length = 100)
   private String updatedBy;
 
-  @Column(nullable = false)
+  @Column(name = "updated_when", nullable = false)
   private Instant updatedWhen;
 
   @PrePersist
