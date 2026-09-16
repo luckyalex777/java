@@ -33,8 +33,7 @@ public class UserRepository {
   public Optional<User> findByLoginName(String loginName) {
     return sessionFactory.getCurrentSession()
         .createQuery("from User where loginName = :loginName", User.class)
-        .setParameter("loginName", loginName)
-        .uniqueResultOptional();
+        .setParameter("loginName", loginName).uniqueResultOptional();
   }
 
   public User save(User user) {

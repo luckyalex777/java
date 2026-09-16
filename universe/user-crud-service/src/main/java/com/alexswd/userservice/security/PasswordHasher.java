@@ -1,6 +1,5 @@
 package com.alexswd.userservice.security;
 
-import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
@@ -49,8 +48,7 @@ public class PasswordHasher {
     secureRandom.nextBytes(salt);
     byte[] derivedKey = deriveKey(password, salt, ITERATIONS);
     return String.join("$", FORMAT_ALGORITHM, VERSION, Integer.toString(ITERATIONS),
-      Base64.getEncoder().encodeToString(salt),
-      Base64.getEncoder().encodeToString(derivedKey));
+        Base64.getEncoder().encodeToString(salt), Base64.getEncoder().encodeToString(derivedKey));
   }
 
   /**
@@ -81,7 +79,7 @@ public class PasswordHasher {
       }
       byte[] actualKey = deriveKey(password, salt, iterations);
       return MessageDigest.isEqual(expectedKey, actualKey);
-    } catch (IllegalArgumentException | GeneralSecurityException exception) {
+    } catch (IllegalArgumentException exception) {
       return false;
     }
   }

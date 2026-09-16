@@ -1,6 +1,7 @@
 package com.alexswd.userservice.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,7 +27,7 @@ class UserServiceTest {
 
     User created = userService.create("alex", "first-secret");
     assertTrue(passwordHasher.matches("first-secret", created.getPasswordHash()));
-    assertFalse(created.getPasswordHash().equals("first-secret"));
+    assertNotEquals("first-secret", created.getPasswordHash());
 
     User updated = userService.update(1L, "alex-updated", "second-secret").orElseThrow();
     assertTrue(passwordHasher.matches("second-secret", updated.getPasswordHash()));
@@ -113,8 +114,7 @@ class UserServiceTest {
     @Override
     public Optional<User> findByLoginName(String loginName) {
       return savedUsers.stream()
-          .filter(user -> loginName != null && loginName.equals(user.getLoginName()))
-          .findFirst();
+          .filter(user -> loginName != null && loginName.equals(user.getLoginName())).findFirst();
     }
   }
 }

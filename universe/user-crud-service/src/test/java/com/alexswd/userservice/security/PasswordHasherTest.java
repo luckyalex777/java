@@ -24,8 +24,7 @@ class PasswordHasherTest {
   @Test
   void rejectsMalformedHashes() {
     assertFalse(passwordHasher.matches("secret", ""));
-    assertFalse(passwordHasher.matches("secret",
-      "pbkdf2-sha256$v1$not-a-number$salt$key"));
+    assertFalse(passwordHasher.matches("secret", "pbkdf2-sha256$v1$not-a-number$salt$key"));
     assertFalse(passwordHasher.matches("secret", "pbkdf2-sha256$v2$310000$c2FsdA$a2V5"));
     assertFalse(passwordHasher.matches("secret", "pbkdf2-sha256$v1$310000$%%%$a2V5"));
     assertFalse(passwordHasher.matches("secret", "pbkdf2-sha256$v1$310000$c2FsdA$"));

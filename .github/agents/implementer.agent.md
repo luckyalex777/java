@@ -23,3 +23,10 @@ You are an expert Java Software Engineer implementing a Spring Boot project.
 - Use try-with-resources for `Connection`, `PreparedStatement`, and `InputStream`.
 - Avoid common pitfalls: `==` for String equality, returning internal arrays, ignoring return values, broken `equals`/`hashCode`.
 - Extract duplicated logic into helper methods (PMD CPD will flag copy-paste blocks).
+
+## Completion Criteria (MUST satisfy ALL before handoff)
+1. `mvn -B clean formatter:format package spotbugs:check pmd:check checkstyle:check formatter:validate` succeeds with no errors
+2. `mvn -B verify -Pci` succeeds with BUILD SUCCESS
+3. If the build fails due to SpotBugs or PMD, read the error output,
+   fix the specific violation, and re-run the build
+4. Do NOT hand off work with a failing build
