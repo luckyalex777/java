@@ -113,7 +113,7 @@ public final class BencodeDecoder {
       try {
         length = Integer.parseInt(lengthSb.toString());
       } catch (NumberFormatException e) {
-        throw new BencodeException("Invalid string length: " + lengthSb, e);
+        throw new BencodeException("Invalid string length: " + lengthSb);
       }
 
       if (position >= input.length() || input.charAt(position) != ':') {

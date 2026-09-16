@@ -11,6 +11,7 @@
   <modules>
     <module>user-crud-service</module>
     <module>bencode-library</module>
+    <module>demo-apps</module>
   </modules>
 
   <name>universe</name>
