@@ -16,7 +16,9 @@ public final class BencodeString extends BencodeValue {
    * @param value the string value to represent
    */
   public BencodeString(String value) {
-    this.value = value.getBytes(StandardCharsets.UTF_8);
+    // Use ISO-8859-1 to preserve all byte values (0-255) when converting strings
+    // This is necessary because bencode is binary-safe and may contain non-UTF-8 data
+    this.value = value.getBytes(StandardCharsets.ISO_8859_1);
   }
 
   /**
@@ -34,7 +36,12 @@ public final class BencodeString extends BencodeValue {
    * @return the string value
    */
   public String getValue() {
-    return new String(value, StandardCharsets.UTF_8);
+    // Try UTF-8 first for text content, fall back to ISO-8859-1 for binary data
+    try {
+      return new String(value, StandardCharsets.UTF_8);
+    } catch (Exception e) {
+      return new String(value, StandardCharsets.ISO_8859_1);
+    }
   }
 
   /**

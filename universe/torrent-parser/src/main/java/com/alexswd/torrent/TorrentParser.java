@@ -89,7 +89,9 @@ public final class TorrentParser {
 
     try {
       byte[] data = stream.readAllBytes();
-      String bencodedContent = new String(data, StandardCharsets.UTF_8);
+      // Use ISO-8859-1 instead of UTF-8 to preserve all byte values (0-255)
+      // Bencode is byte-based, not character-based, so we need a 1:1 byte mapping
+      String bencodedContent = new String(data, StandardCharsets.ISO_8859_1);
 
       BencodeDecoder decoder = new BencodeDecoder();
       BencodeValue decoded = decoder.decode(bencodedContent);
