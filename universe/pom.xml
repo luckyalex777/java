@@ -12,6 +12,7 @@
     <module>user-crud-service</module>
     <module>bencode-library</module>
     <module>torrent-parser</module>
+    <module>network-library</module>
     <module>demo-apps</module>
   </modules>
 
