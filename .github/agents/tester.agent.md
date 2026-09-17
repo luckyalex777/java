@@ -19,7 +19,8 @@ You are an expert Java testing specialist for a Spring Boot project.
 
 ## Completion Criteria (MUST satisfy ALL before finishing)
 1. `mvn -B test` succeeds with all tests passing
-2. `mvn -B verify -Pci` succeeds with BUILD SUCCESS
-3. If SpotBugs or PMD flag violations in test code, fix them and re-run
-4. Do NOT finish with a failing build or a red test
-5. If a test reveals a production bug, report it — do NOT modify production code
+2. `mvn -B clean formatter:format package spotbugs:check pmd:check checkstyle:check formatter:validate` succeeds with BUILD SUCCESS
+3. `mvn -B verify -Pci` succeeds with BUILD SUCCESS
+4. If SpotBugs or PMD flag violations in test code, fix them and re-run
+5. Do NOT finish with a failing build or a red test
+6. If a test reveals a production bug, report it — do NOT modify production code
