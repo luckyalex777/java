@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+top=${PWD}
+CLASSPATH=${top}/target/torrent-parser-demo-1.0-SNAPSHOT.jar
+libs=`find ${top}/target/dependency -name \*\.jar`
+for lib in $libs
+do
+    CLASSPATH=${CLASSPATH}:${lib}
+done
+echo $CLASSPATH
+export CLASSPATH
+dt=`date +'%y%m%d%H%M%S'`
+#java com.alexswd.bencodedemo.TorrentParserDemo ../torrent-files/ubuntu-26.04.1-desktop-amd64.iso.torrent
+java com.alexswd.bencodedemo.TorrentParserDemo ../torrent-files/xakep.torrent

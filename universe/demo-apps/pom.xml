@@ -18,6 +18,6 @@
   <description>Parent project for demo applications</description>
 
   <modules>
-    <!-- Child demo modules will be added here -->
+    <module>torrent-parser-demo</module>
   </modules>
 </project>
