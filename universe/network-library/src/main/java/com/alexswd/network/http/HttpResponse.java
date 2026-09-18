@@ -1,5 +1,7 @@
 package com.alexswd.network.http;
 
+import java.util.Arrays;
+
 /**
  * Represents an HTTP response.
  */
@@ -15,7 +17,7 @@ public class HttpResponse {
    */
   public HttpResponse(int status, byte[] body) {
     this.status = status;
-    this.body = body;
+    this.body = Arrays.copyOf(body, body.length);
   }
 
   /**
@@ -33,6 +35,6 @@ public class HttpResponse {
    * @return the response body
    */
   public byte[] getBody() {
-    return body;
+    return Arrays.copyOf(body, body.length);
   }
 }

@@ -4,6 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
+import java.nio.charset.StandardCharsets;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,7 @@ class HttpResponseTest {
   void testHttpResponseCreation() {
     // Arrange
     int status = 200;
-    byte[] body = "Hello World".getBytes();
+    byte[] body = "Hello World".getBytes(StandardCharsets.UTF_8);
 
     // Act
     HttpResponse response = new HttpResponse(status, body);
@@ -46,7 +48,7 @@ class HttpResponseTest {
   @DisplayName("Should store body correctly")
   void testBodyStorage() {
     // Arrange
-    byte[] body = "test response body".getBytes();
+    byte[] body = "test response body".getBytes(StandardCharsets.UTF_8);
     HttpResponse response = new HttpResponse(200, body);
 
     // Act

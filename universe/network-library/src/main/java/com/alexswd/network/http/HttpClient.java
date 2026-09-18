@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * HTTP client for making HTTP requests.
@@ -25,6 +27,7 @@ public class HttpClient {
    *
    * @param socket the socket to use for HTTP communication
    */
+  @SuppressFBWarnings("EI_EXPOSE_REP2")
   public HttpClient(ISocket socket) {
     this.socket = socket;
   }
@@ -64,12 +67,12 @@ public class HttpClient {
       request += "Connection: close\r\n";
       request += "\r\n";
 
-      socket.getOutputStream().write(request.getBytes());
+      socket.getOutputStream().write(request.getBytes(StandardCharsets.UTF_8));
       socket.getOutputStream().flush();
 
       // Read response
       byte[] responseBytes = readAllBytes(socket.getInputStream());
-      String responseStr = new String(responseBytes);
+      String responseStr = new String(responseBytes, StandardCharsets.UTF_8);
 
       // Parse status code and body
       int statusCode = parseStatusCode(responseStr);
