@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+top=${PWD}
+CLASSPATH=${top}/target/http-client-demo-1.0-SNAPSHOT.jar
+libs=`find ${top}/target/dependency -name \*\.jar`
+for lib in $libs
+do
+    CLASSPATH=${CLASSPATH}:${lib}
+done
+#echo $CLASSPATH
+export CLASSPATH
+dt=`date +'%y%m%d%H%M%S'`
+java com.alexswd.httpclientdemo.HttpClientDemo https://www.google.com
+java com.alexswd.httpclientdemo.HttpClientDemo http://72.93.226.177

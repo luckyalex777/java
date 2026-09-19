@@ -19,5 +19,6 @@
 
   <modules>
     <module>torrent-parser-demo</module>
+    <module>http-client-demo</module>
   </modules>
 </project>

@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
@@ -41,6 +42,19 @@ public class HttpClient {
    * @throws IllegalArgumentException if the URL is invalid
    */
   public HttpResponse get(String url) throws IOException {
+    return get(url, null);
+  }
+
+  /**
+   * Sends an HTTP GET request to the specified URL.
+   *
+   * @param url the URL to request (e.g., "http://example.com/path")
+   * @param headers additional HTTP request headers
+   * @return the HTTP response with status and body
+   * @throws IOException if an I/O error occurs
+   * @throws IllegalArgumentException if the URL is invalid
+   */
+  public HttpResponse get(String url, Map<String, String> headers) throws IOException {
     // Parse URL to extract host, port, and path
     URL urlObj = new URL(url);
     String host = urlObj.getHost();
@@ -65,6 +79,11 @@ public class HttpClient {
       String request = "GET " + path + " HTTP/1.1\r\n";
       request += "Host: " + host + "\r\n";
       request += "Connection: close\r\n";
+      if (headers != null) {
+        for (var entry : headers.entrySet()) {
+          request += String.format("%s: %s\r%n", entry.getKey(), entry.getValue());
+        }
+      }
       request += "\r\n";
 
       socket.getOutputStream().write(request.getBytes(StandardCharsets.UTF_8));
