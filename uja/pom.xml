@@ -4,19 +4,18 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.alexswd</groupId>
-  <artifactId>universe</artifactId>
+  <artifactId>uja</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
-    <module>user-crud-service</module>
     <module>bencode-library</module>
     <module>torrent-parser</module>
-    <module>network-library</module>
     <module>demo-apps</module>
+    <module>network-library</module>
   </modules>
 
-  <name>universe</name>
+  <name>uja</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
