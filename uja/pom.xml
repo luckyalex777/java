@@ -13,6 +13,7 @@
     <module>torrent-parser</module>
     <module>demo-apps</module>
     <module>network-library</module>
+    <module>torrent-tracker</module>
   </modules>
 
   <name>uja</name>

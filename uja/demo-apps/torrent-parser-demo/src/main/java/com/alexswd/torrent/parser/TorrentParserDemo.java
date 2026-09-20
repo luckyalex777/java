@@ -1,7 +1,5 @@
-package com.alexswd.bencodedemo;
+package com.alexswd.torrent.parser;
 
-import com.alexswd.torrent.TorrentInfo;
-import com.alexswd.torrent.TorrentParser;
 import java.io.File;
 import java.util.List;
 import org.slf4j.Logger;

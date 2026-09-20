@@ -1,4 +1,4 @@
-package com.alexswd.bencodedemo;
+package com.alexswd.torrent.parser;
 
 import java.time.Instant;
 import java.time.ZoneId;

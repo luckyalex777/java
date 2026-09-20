@@ -1,4 +1,4 @@
-package com.alexswd.torrent;
+package com.alexswd.torrent.parser;
 
 import com.alexswd.bencode.BencodeDecoder;
 import com.alexswd.bencode.BencodeDict;

@@ -10,5 +10,5 @@ done
 #echo $CLASSPATH
 export CLASSPATH
 dt=`date +'%y%m%d%H%M%S'`
-java com.alexswd.bencodedemo.TorrentParserDemo ../torrent-files/ubuntu-26.04.1-desktop-amd64.iso.torrent
-java com.alexswd.bencodedemo.TorrentParserDemo ../torrent-files/xakep.torrent
+java com.alexswd.torrent.parser.TorrentParserDemo ../torrent-files/ubuntu-26.04.1-desktop-amd64.iso.torrent
+java com.alexswd.torrent.parser.TorrentParserDemo ../torrent-files/xakep.torrent

@@ -1,4 +1,4 @@
-package com.alexswd.torrent;
+package com.alexswd.torrent.parser;
 
 /**
  * Exception thrown when there is an error parsing or processing torrent files.

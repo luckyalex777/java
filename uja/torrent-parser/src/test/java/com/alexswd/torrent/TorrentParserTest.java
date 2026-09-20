@@ -1,4 +1,4 @@
-package com.alexswd.torrent;
+package com.alexswd.torrent.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

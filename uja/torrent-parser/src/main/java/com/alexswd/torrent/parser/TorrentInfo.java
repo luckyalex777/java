@@ -1,4 +1,4 @@
-package com.alexswd.torrent;
+package com.alexswd.torrent.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
