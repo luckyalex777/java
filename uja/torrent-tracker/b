@@ -1,3 +1,0 @@
-#!/bin/bash
-set -e
-mvn clean formatter:format install spotbugs:check pmd:check checkstyle:check formatter:validate
